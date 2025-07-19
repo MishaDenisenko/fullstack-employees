@@ -1,0 +1,37 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+*.log.*
+*.swp
+.DS_Store
+
+# === IDE/Editor ===
+.idea/
+.vscode/
+*.tsbuildinfo
+
+# === Docker ===
+docker-compose.override.yml
+
+# === Клиент (Next.js) ===
+client/.idea/
+client/.next/
+client/.turbo/
+client/out/
+client/node_modules/
+client/package-lock.json
+client/yarn.lock
+client/.env
+client/.env.*
+
+# === Сервер (NestJS) ===
+server/.idea/
+server/dist/
+server/node_modules/
+server/package-lock.json
+server/yarn.lock
+server/.env
+server/coverage/
+server/prisma/migrations/

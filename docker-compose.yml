@@ -1,0 +1,35 @@
+services:
+    client:
+        build: ./client
+        container_name: next-client
+        ports:
+            - "3000:3000"
+        depends_on:
+            - server
+    server:
+        build: ./server
+        container_name: nest-server
+        ports:
+            -   '8000:8000'
+        depends_on:
+            -   postgres
+        environment:
+            DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/nest_prisma'
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        entrypoint: ["sh", "./migrate-and-start.sh"]
+    postgres:
+        image: postgres:15
+        container_name: postgres
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: nest_prisma
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:
